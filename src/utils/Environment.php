@@ -1,8 +1,13 @@
 <?php
 
+namespace App\Src\Utils;
+
+use InvalidArgumentException;
+use RuntimeException;
+
 class Environment
 {
-    protected string $path = __DIR__ . "../../.env";
+    protected string $path = __DIR__ . "/../../.env";
 
     public function __construct(string $path)
     {

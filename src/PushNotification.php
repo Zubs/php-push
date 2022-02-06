@@ -1,23 +1,33 @@
 <?php
 
-use Environment;
+namespace App\Src;
+
+use App\Src\Utils\Environment;
+use Exception;
 
 class PushNotification
 {
     protected string $title;
     protected string $body;
-    protected string $alert;
+    protected string $alert = 'New message in app';
     protected string $sound = 'default';
     protected string $priority = 'high';
     protected bool $content_available = true;
 
     protected $url = 'https://fcm.googleapis.com/fcm/send';
 
-    public function __construct()
+    public function __construct(string $title, string $body)
     {
-        (new Environment(''))->load();
+        try {
+            (new Environment(''))->load();
 
-        $this->url = getenv('FCM_URL');
+            $this->url = getenv('FCM_URL');
+        } catch (Exception $exception) {
+            throw $exception;
+        }
+
+        $this->title = $title;
+        $this->body = $body;
     }
 
     public function getNotification(): array
@@ -46,6 +56,12 @@ class PushNotification
             'Authorization: key=' . getenv('SERVER_KEY'),
             'Content-Type: application/json'
         ];
+    }
+
+    public function setAlert(string $alert)
+    {
+        $this->alert = $alert;
+        return $this;
     }
     
     public function setBody(): string
