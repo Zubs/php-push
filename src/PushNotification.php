@@ -58,7 +58,7 @@ class PushNotification
         ];
     }
 
-    public function setAlert(string $alert)
+    public function setAlert(string $alert): PushNotification
     {
         $this->alert = $alert;
         return $this;
@@ -67,7 +67,7 @@ class PushNotification
     public function setBody(): string
     {
         return json_encode([
-            'to' => '',
+            'to' => 'f07855o3FWROSyxSvI5rWr:APA91bF5_rYnk-AaeuatRfMnH3kLtOHLs9-KWnYHhb0BU5pbsLI2Hs4I4J5TgatkXVi9rxqSgq2a_y_HdO5CfOynAP6F5EQJLahIuD1Bu5LZpQRLjy5yeo6CxmjP7c0K2Q5A0hX48MSj',
             'notification' => $this->getNotification(),
             'data' => $this->getData(),
             'priority' => 10,
