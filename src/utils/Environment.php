@@ -20,7 +20,7 @@ class Environment
         }
     }
 
-    public function load()
+    public function load(): void
     {
         if (!is_readable($this->path)) {
             throw new RuntimeException(sprintf("%s file is not readable", $this->path));

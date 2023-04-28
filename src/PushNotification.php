@@ -14,17 +14,13 @@ class PushNotification
     protected string $priority = 'high';
     protected bool $content_available = true;
 
-    protected $url = 'https://fcm.googleapis.com/fcm/send';
+    protected string $url = 'https://fcm.googleapis.com/fcm/send';
 
     public function __construct(string $title, string $body)
     {
-        try {
-            (new Environment(''))->load();
+        (new Environment(''))->load();
 
-            $this->url = getenv('FCM_URL');
-        } catch (Exception $exception) {
-            throw $exception;
-        }
+        $this->url = getenv('FCM_URL');
 
         $this->title = $title;
         $this->body = $body;
